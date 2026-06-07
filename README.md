@@ -5,12 +5,23 @@ Students can sign up, take quizzes, and review scores. Teachers can create quiz
 sets, add multiple-choice questions, mark correct answers, and manage the quiz
 library.
 
+Live website:
+
+```text
+https://online-quiz-platform-quiz-forge.vercel.app/
+```
+
+To use the hosted website, download this project and run the Java backend on
+your computer first. The Vercel website is the frontend, and it needs the local
+backend API running at `http://localhost:8080` for login, quizzes, teacher tools,
+and MongoDB data.
+
 ## Features
 
 - Student signup and student login
 - Separate teacher signup and teacher login
-- Teacher dashboard for creating quizzes
-- Teacher tools for adding and deleting questions
+- Teacher dashboard for creating and editing quizzes
+- Teacher tools for adding, editing, and deleting questions
 - Public quiz listing on the home page
 - Quiz ready screen before the timer starts
 - Timed quiz attempts
@@ -29,6 +40,31 @@ Student: student@quiz.com / student123
 ```
 
 You can also create new teacher and student accounts from the website.
+
+## Use The Website
+
+1. Download or clone this project.
+2. Install Java JDK and Maven.
+3. Create `backend/.env` from `backend/.env.example`:
+
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-host>/
+MONGODB_DATABASE=online_quiz_platform
+```
+
+4. Run the backend:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File backend/run-backend.ps1
+```
+
+5. Open the hosted website:
+
+```text
+https://online-quiz-platform-quiz-forge.vercel.app/
+```
+
+The backend must stay running while using the website.
 
 ## Project Structure
 
@@ -57,45 +93,28 @@ Project 2/
 |                       `-- store/
 |                           |-- Database.java
 |                           `-- DemoDataSeeder.java
-|-- frontend/
-|   |-- index.html
-|   |-- package.json
-|   |-- vite.config.js
-|   `-- src/
-|       |-- App.jsx
-|       |-- main.jsx
-|       |-- styles.css
-|       |-- components/
-|       |   |-- admin/
-|       |   |-- auth/
-|       |   |-- dashboard/
-|       |   |-- home/
-|       |   |-- layout/
-|       |   |-- quiz/
-|       |   `-- shared/
-|       `-- utils/
-`-- Report/
-    `-- #CourseReport_Template_Final 2026（期末交纸质版+电子版）.doc
+`-- frontend/
+    |-- index.html
+    |-- package.json
+    |-- vite.config.js
+    `-- src/
+        |-- App.jsx
+        |-- main.jsx
+        |-- styles.css
+        |-- components/
+        |   |-- admin/
+        |   |-- auth/
+        |   |-- dashboard/
+        |   |-- home/
+        |   |-- layout/
+        |   |-- quiz/
+        |   `-- shared/
+        `-- utils/
 ```
 
 ## Backend Setup
 
-Create `backend/.env` from `backend/.env.example`:
-
-```env
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-host>/
-MONGODB_DATABASE=online_quiz_platform
-```
-
-Do not commit the real password. The backend `.env` file is ignored.
-
-Run the backend:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File backend/run-backend.ps1
-```
-
-Or run it manually:
+Manual backend commands:
 
 ```bash
 cd backend
@@ -125,7 +144,7 @@ java -jar target/online-quiz-platform-1.0.0.jar --seed-only
 
 ## Frontend Setup
 
-Install and run the frontend:
+Install and run the frontend locally:
 
 ```bash
 cd frontend
@@ -157,12 +176,14 @@ GET    /api/me
 
 GET    /api/quizzes
 POST   /api/quizzes
+PUT    /api/quizzes/{id}
 DELETE /api/quizzes/{id}
 GET    /api/quizzes/{id}
 GET    /api/quizzes/{id}/review
 GET    /api/admin/quizzes/{id}
 
 POST   /api/quizzes/{id}/questions
+PUT    /api/questions/{id}
 DELETE /api/questions/{id}
 
 POST   /api/attempts
