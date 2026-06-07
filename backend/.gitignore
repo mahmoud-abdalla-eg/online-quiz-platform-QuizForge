@@ -1,0 +1,12 @@
+backend/target/
+
+backend/out/
+.env
+backend/.env
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+.idea/
+.vscode/
+*.class

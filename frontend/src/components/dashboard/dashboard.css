@@ -1,0 +1,48 @@
+.dashboard-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-hero p {
+  max-width: 42rem;
+  color: var(--muted);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  gap: 1rem;
+}
+
+.quiz-list,
+.attempt-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.attempt-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 0.8rem;
+  background: var(--accent-soft);
+  padding: 1rem;
+}
+
+.attempt-card h3,
+.attempt-card p {
+  margin-bottom: 0;
+}
+
+.attempt-card p {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.attempt-card strong {
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
