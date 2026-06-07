@@ -16,7 +16,7 @@ const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8080";
 function App() {
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(storedToken);
-  const [page, setPage] = useState(storedUser ? "dashboard" : "home");
+  const [page, setPage] = useState("home");
   const [quizzes, setQuizzes] = useState([]);
   const [activeQuiz, setActiveQuiz] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -137,7 +137,7 @@ function App() {
     }
     clearSession();
     setBackendOnline(false);
-    setPage("login");
+    setPage("home");
     notify("Connection lost. You were signed out. Please log in again when the service is available.");
   }
 
